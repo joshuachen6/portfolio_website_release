@@ -3,6 +3,7 @@ auth/secrets/
 database.db
 /db_backups
 /venv
+/.venv
 /wsl_venv
 /ssl
 uWSGI.ini

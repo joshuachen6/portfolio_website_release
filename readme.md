@@ -21,35 +21,50 @@ This is the source code release of my portfolio website
 
 ### Clone repository
 
-`git clone https://github.com/joshuachen6/portfolio_website_release.git`
+```bash
+git clone https://github.com/joshuachen6/portfolio_website_release.git
+```
 
 ### Set up virtual environment
 
-`python3 -m venv .venv`
+```bash
+python3 -m venv .venv
+```
 
 - Linux\MacOS
-`source .venv/bin/activate`
+
+```bash
+source .venv/bin/activate
+```
+
 - Windows
-`.\.venv\Scripts\activate`
+
+```bash
+.\.venv\Scripts\activate
+```
 
 ### Install dependencies
 
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
 ### Create passwords
 
-Create `auth/secrets/password.yaml`
-Add the line `public: {Your public password}`
-Add the line `private: {Your private password}`
+Edit `auth/secrets/password.yaml`. You can change the private and public passwords here. The private is the administrator password and the public is for view access.
 The file `code.png` in this folder contains your one time password code for authenticator apps
 
 ## How to run
 
 ### Testing
 
-`python3 main.py`
+```bash
+python3 main.py
+```
 
 ### Deployment
 
-`pip install uwsgi`
-`uwsgi uWSGI.ini`
+```bash
+pip install uwsgi
+uwsgi uWSGI.ini
+```

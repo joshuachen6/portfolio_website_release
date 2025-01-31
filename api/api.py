@@ -120,7 +120,7 @@ def api_by_tag():
         return flask.jsonify({"articles": result[0]})
 
 
-@blueprint.route("/comments/<article>", methods=["GET", "POST"])
+@blueprint.route("/comments/<article>", methods=["GET", "POST", "DELETE"])
 def api_comments(article):
     database = DataBase()
     database.cursor.execute(
@@ -151,7 +151,7 @@ def api_comments(article):
                 start = int(args.get("start"))
                 database.cursor.execute(
                     """
-                    SELECT author, message, timestamp, official FROM comments 
+                    SELECT author, message, timestamp, official, id FROM comments 
                     WHERE article_id = ? 
                     ORDER BY timestamp DESC 
                     LIMIT 10 OFFSET ?;
@@ -167,6 +167,7 @@ def api_comments(article):
                                 "message": entry[1],
                                 "time": entry[2],
                                 "official": entry[3],
+                                "id": entry[4],
                             }
                             for entry in output
                         ]
@@ -185,5 +186,18 @@ def api_comments(article):
             (article, data["author"], data["message"], time.time_ns(), official),
         )
         database.connection.commit()
+    elif flask.request.method == "DELETE":
+        data = flask.request.json
+        if auth.auth.validate_auth():
+            database.cursor.execute(
+                """
+                DELETE FROM comments
+                WHERE article_id = ? AND id = ?;
+                """,
+                (article, data["id"]),
+            )
+            database.connection.commit()
+        else:
+            flask.make_response("", 403)
 
     return flask.make_response("", 200)

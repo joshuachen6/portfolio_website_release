@@ -7,6 +7,10 @@
         <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>Portfolio</title>
+
+        <script>
+          var auth = {{auth}};
+        </script>
         {% block header %}
         {% endblock %}
     </head>
