@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Portfolio</title>
+        {% block header %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+            <div class="container-fluid justify-content-start">
+                <a class="navbar-brand" href="/#">
+                    <span class="material-icons icon-m">home</span>                        
+                </a>
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Projects
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/article/index">Index</a></li>
+                            <li><a class="dropdown-item" href="/article/browse">Browse</a></li>
+                        </ul>
+                    </li>
+               </ul>
+                <ul class="nav ms-auto">
+                    {% if auth >= 1%}
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="/logout">Logout</a>
+                        </li>
+                        {% if auth == 2 %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white fw-bold" href="/editor?article_id=new">Editor</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="javascript:window.location.href = `/login?redirect=${window.location.pathname + window.location.search}`">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-3 pb-5">
+            {% block body %}
+            {% endblock %}
+        </div>
+        {% block footer %}
+        {% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container text-center">
+    <h3>This is a list of my projects on the portfolio</h3>
+    <p>Click on any of the rows to see the article</p>
+</div>
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>Entry</th>
+        <th>Title</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{table | safe}}
+    </tbody>
+</table>
+{% endblock %}

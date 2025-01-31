@@ -1,0 +1,5 @@
+backup_interval: 0
+backup_directory: db_backups
+max_backup_days: 7
+
+token_expiration: 3600

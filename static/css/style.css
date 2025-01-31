@@ -1,0 +1,37 @@
+.centered {
+    text-align: center;
+}
+
+.keep-ratio {
+    width: 100%;
+    height: auto;
+}
+
+.icon-s {
+    font-size: 24px !important;
+}
+
+.icon-m {
+    font-size: 48px !important;
+}
+
+.icon-l {
+    font-size: 96px !important;
+}
+
+.block {
+    display: inline-block;
+}
+
+.button {
+    background: none;
+    border: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.strike {
+    text-decoration: line-through;
+}

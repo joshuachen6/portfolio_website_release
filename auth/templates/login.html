@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Login</h1>
+<form id="login" class="row gy-3">
+    <div class="col-auto">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password">
+    </div>
+    <div class="col-auto">
+        <label class="form-label" for="token">Token (Private access only, ignore otherwise)</label>
+        <input class="form-control" type="text" id="token" name="token">
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block footer %}
+<script>
+    let form = document.getElementById('login');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let data = new FormData(form);
+        fetch('/login', {
+            method: 'POST',
+            body: data
+        }).then((response) => {
+            if (response.ok){
+                let params = new URLSearchParams(window.location.search);
+                if (params.has('redirect')) {
+                    window.location.href = params.get('redirect');
+                } else {
+                    window.location.href = '/';
+                }
+            } else if (response.status === 401) {
+                window.alert('Invalid Credentials');
+            }
+        });
+    })
+</script>
+{% endblock %}

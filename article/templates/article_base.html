@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<style>
+    .ql-editor {
+        white-space: normal;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            {{blog_tags | safe}}
+            <h1>{{blog_title}}</h1>
+            {{blog_date | safe}}
+        </div>
+        {% if auth == 2 %}
+        <div class="col-6 d-flex justify-content-end">
+            <a href="{{editor_link}}">
+                <span class="material-icons icon-m">edit</span>
+            </a>
+        </div>
+        {% endif %}
+        <div class="col-12" style="min-height: 100vh">
+            <div class="container ql-editor" style="width: 100%;">
+                {{blog_body | safe}}
+            </div>
+        </div>
+    </div>
+
+    <hr class="border-2 mt-5 mb-5 rounded">
+    <h1 class="mb-5">Discussion</h1>
+    <ul class="list-group d-flex align-items-center" id="comment-container">
+        <div class="container">
+            <div class="row m-5">
+                <div class="col-12 mt-5 centered">
+                    <h4>No comments yet</h4>
+                </div>
+                <div class="col-12 mb-5 centered">
+                    <p>Write the first comment</p>
+                </div>
+            </div>
+        </div>
+    </ul>
+    <div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col d-flex justify-content-start">
+                <button id="previous-comments" class="button">
+                    <span class="material-icons icon-m">west</span>
+                </button>
+            </div>
+            <div class="col d-flex justify-content-center" id="comment-range"></div>
+            <div class="col d-flex justify-content-end">
+                <button id="next-comments" class="button">
+                    <span class="material-icons icon-m">east</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr class="border-2 mt-5 mb-5 rounded">
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <div class="card border-light w-75">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <label for="comment-name" class="form-label">Name</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="comment-name" placeholder="Name" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ratio ratio-21x9">
+                        <label for="comment-body" class="form-label">Comment</label>
+                        <textarea id="comment-body" placeholder="Message" class="form-control h-100"></textarea>
+                    </div>
+                    <div class="card-footer border-light">
+                        <button id="comment-submit" class="btn btn-primary">Add Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script type="module" src="{{url_for('api.static', filename='js/comments.mjs')}}"></script>
+{% endblock %}

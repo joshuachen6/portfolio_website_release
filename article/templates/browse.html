@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{{decks | safe}}
+{% endblock %}
+
+
+{% block footer %}
+<script type="module" src="{{url_for('article.static', filename='js/cards.mjs')}}"></script>
+{% endblock %}

@@ -1,0 +1,10 @@
+/static/uploads
+auth/secrets/
+database.db
+/db_backups
+/venv
+/wsl_venv
+/ssl
+uWSGI.ini
+backup.lock
+__pycache__
