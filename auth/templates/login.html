@@ -2,13 +2,14 @@
 
 {% block body %}
 <h1>Login</h1>
+<p>Leave fields blank to view as guest user</p>
 <form id="login" class="row gy-3">
     <div class="col-auto">
         <label class="form-label" for="password">Password</label>
         <input class="form-control" type="password" id="password" name="password">
     </div>
     <div class="col-auto">
-        <label class="form-label" for="token">Token (Private access only, ignore otherwise)</label>
+        <label class="form-label" for="token">Token</label>
         <input class="form-control" type="text" id="token" name="token">
     </div>
     <div class="col-12">

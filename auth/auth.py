@@ -35,7 +35,7 @@ with open(totp_path, "r") as file:
 passwords_path = os.path.join(auth_root, "password.yaml")
 if not os.path.exists(passwords_path):
     with open(passwords_path, "w") as file:
-        yaml.dump({"public": "password", "private": "admin"}, file)
+        yaml.dump({"private": "admin"}, file)
 
 
 class TokenManager:
@@ -163,7 +163,7 @@ def login():
                 and credentials["token"] == totp.now()
             ):
                 auth_level = AuthLevel.PRIVATE
-            elif passwords["public"] == credentials["password"]:
+            elif not (credentials["password"].strip() or credentials["token"]):
                 auth_level = AuthLevel.PUBLIC
             else:
                 return flask.make_response("", 401)
