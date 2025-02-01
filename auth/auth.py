@@ -163,7 +163,7 @@ def login():
                 and credentials["token"] == totp.now()
             ):
                 auth_level = AuthLevel.PRIVATE
-            elif not (credentials["password"].strip() or credentials["token"]):
+            elif not (credentials["password"].strip() or credentials["token"].strip()):
                 auth_level = AuthLevel.PUBLIC
             else:
                 return flask.make_response("", 401)
