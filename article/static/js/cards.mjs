@@ -102,9 +102,37 @@ class CardDeck {
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    for (let element of document.getElementsByClassName('deck-container')) {
-        new CardDeck(element);
-    }
+   let deckContainer = document.getElementById("decks");
+   let response = fetch("/api/tags").then((response)=>{
+    response.json().then(
+      (json)=>{
+        let tags = json.tags;
+        for (let tag of tags) {
+
+          let element = parseHtml(`<div class="deck-container row hidden fade">
+          <h3>${tag.name}</h3>
+          <div class="col-auto d-flex justify-content-center align-items-center">
+              <button class="left button">
+                  <span class="material-icons icon-m">west</span>
+              </button>
+          </div>
+          <div class="card-deck col d-flex justify-content-center" id="${tag.id}">
+
+          </div>
+          <div class="col-auto d-flex justify-content-center align-items-center">
+              <button class="right button">
+                  <span class="material-icons icon-m">east</span>
+              </button>
+          </div>
+          <hr class="border-2 mt-5 mb-5 rounded">
+      </div>`);
+        
+          deckContainer.appendChild(element);
+          new CardDeck(element);
+        }
+      }
+    );
+  }); 
 });
 
 window.addEventListener('resize', ()=>window.location.reload());
